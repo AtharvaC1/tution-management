@@ -11,7 +11,7 @@ const app = express();
 
 // ✅ FIX: Correct and flexible CORS configuration
 const allowedOrigins = [
-  "http://localhost:3000", // local React
+  "http://localhost:5173", // local React
   "https://shree-samartha-classes.vercel.app", // deployed React on Vercel
 ];
 
