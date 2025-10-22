@@ -29,7 +29,7 @@ export default function Login() {
             || श्री राम समर्थ ||
           </p>
           <img
-            src="./public/Samarth-Ramdas.png"
+            src="/Samarth-Ramdas.png"
             alt="Logo"
             className="w-24 h-28 mx-auto drop-shadow-sm"
           />

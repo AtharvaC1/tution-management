@@ -210,7 +210,7 @@ const Dashboard = () => {
         <div>
           <div class="flex items-center justify-center">
             <img
-              src="./public/Samarth-Ramdas.png"
+              src="/Samarth-Ramdas.png"
               alt="Logo"
               className="w-20 h-25"
             />
