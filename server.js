@@ -10,7 +10,7 @@ dotenv.config();
 const app = express();
 // app.use(cors());
 const allowedOrigins = [
-  "http://localhost:5173", // for Vite local dev
+  // "http://localhost:5173", // for Vite local dev
   "https://shree-samartha-classes.vercel.app", // your Vercel frontend
 ];
 
