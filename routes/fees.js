@@ -94,7 +94,7 @@ router.put("/:id/pay", auth, async (req, res) => {
     if (!amount || amount <= 0)
       return res.status(400).json({ message: "Invalid payment amount" });
 
-    // ✅ Prevent paying more than remaining
+    //  Prevent paying more than remaining
     if (amount > fee.remainingAmount) {
       return res
         .status(400)
@@ -114,7 +114,9 @@ router.put("/:id/pay", auth, async (req, res) => {
     else fee.status = "Paid";
 
     await fee.save();
-    res.json(fee);
+    const updatedFee = await Fee.findById(req.params.id).populate("studentId");
+
+    res.json(updatedFee);
   } catch (err) {
     console.error("Error processing payment:", err);
     res.status(500).json({ message: err.message });

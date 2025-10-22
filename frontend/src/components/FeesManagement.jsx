@@ -30,7 +30,6 @@ const FeeManagement = () => {
     fetchFees();
   }, []);
 
-  // ✅ Handle payment
   const handlePayment = async (feeId) => {
     const currentFee = fees.find((f) => f._id === feeId);
     const enteredAmount = Number(payment[feeId]);
@@ -46,17 +45,23 @@ const FeeManagement = () => {
     }
 
     try {
-      const res = await API.put(`/fees/${feeId}/pay`, { amount: enteredAmount });
+      const res = await API.put(`/fees/${feeId}/pay`, {
+        amount: enteredAmount,
+      });
       setFees(fees.map((f) => (f._id === feeId ? res.data : f)));
+      setTimeout(async () => {
+        const refreshed = await API.get("/fees");
+        setFees(refreshed.data);
+      }, 300);
       setPayment({ ...payment, [feeId]: "" });
     } catch (err) {
       console.error(err);
     }
   };
 
-  // ❌ Handle delete
   const handleDelete = async (feeId) => {
-    if (!window.confirm("Are you sure you want to delete this fee record?")) return;
+    if (!window.confirm("Are you sure you want to delete this fee record?"))
+      return;
     try {
       await API.delete(`/fees/${feeId}`);
       setFees(fees.filter((f) => f._id !== feeId));
@@ -66,7 +71,6 @@ const FeeManagement = () => {
     }
   };
 
-  // 🔍 Filtered & Sorted Data
   const filteredFees = fees.filter((fee) =>
     fee.studentId?.name?.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -110,7 +114,9 @@ const FeeManagement = () => {
           {/* Sort Button */}
           <button
             onClick={() =>
-              setSortOrder(sortOrder === "asc" ? "desc" : sortOrder === "desc" ? "" : "asc")
+              setSortOrder(
+                sortOrder === "asc" ? "desc" : sortOrder === "desc" ? "" : "asc"
+              )
             }
             className="bg-blue-600 hover:bg-blue-500 text-white px-3 py-2 rounded-lg flex items-center gap-1 text-sm transition-all shadow-sm"
             title="Sort by status"
