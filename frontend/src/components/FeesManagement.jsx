@@ -49,10 +49,6 @@ const FeeManagement = () => {
         amount: enteredAmount,
       });
       setFees(fees.map((f) => (f._id === feeId ? res.data : f)));
-      setTimeout(async () => {
-        const refreshed = await API.get("/fees");
-        setFees(refreshed.data);
-      }, 300);
       setPayment({ ...payment, [feeId]: "" });
     } catch (err) {
       console.error(err);
