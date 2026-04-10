@@ -53,7 +53,7 @@ const ViewStudents = () => {
     if (!window.confirm("Are you sure you want to delete this student?")) return;
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:5000/api/students/${id}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/students/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setStudents((prev) => prev.filter((student) => student._id !== id));

@@ -69,7 +69,7 @@ const EditStudent = () => {
     try {
       const token = localStorage.getItem("token");
 
-      await axios.put(`http://localhost:5000/api/students/${id}`, formData, {
+      await axios.put(`${import.meta.env.VITE_API_URL}/api/students/${id}`, formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
